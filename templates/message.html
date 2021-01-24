@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block logged_in %}
+<div style="margin: auto;">
+<table>
+    <td style="border-bottom: 1px solid black;"><a href="/view-profile/{{user.id}}"><img src=/{{user.profilePic}} height="130px"></a></td>
+    <td><a href="/view-profile/{{user.id}}"><p>{{ user.firstname }} {{ user.lastname }}</p>
+    <p>{{user.Age}}</p><p>{{user.age}}</p></a></td>
+    </table>
+    <table>
+        <tr>
+            <td><p id="PX"></p></td>
+        </tr>
+        <form action="/message/{{user.id}}" METHOD="POST">
+        <input type="text" name="message"/><button type="submit">Send message</button></form>
+    </table>
+</div>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf-8">
+    var socket = io();
+    socket.on('messages', function(msg) {
+        document.getElementById("PX").innerHTML = ""        
+        msg["data"].forEach(element => {
+            var listViewItem=document.createElement("P3")
+            textnode = document.createTextNode(element["content"])
+            listViewItem.appendChild(textnode)
+            document.getElementById("PX").appendChild(listViewItem)
+            document.getElementById("PX").appendChild(document.createElement("br"))
+
+        });
+    });
+    setInterval(function()  {
+        socket.emit("get-messages", {data: {"me": "{{session}}", "them": "{{user.id}}"}})
+        }, 500);
+</script>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block logged_in %}
+<div>
+<table>
+    <tr><td><a href="/account">Edit Account</a></td>
+    <td><a href="/update-profile">Edit Profile</a></td>
+    <td><a href="/gallery">Gallery</a></td></tr>
+    <tr><td><a href="{{item}}" target="_blank"><img src={{pp}} height="100" ></a></td></tr>
+    <tr>
+    {% for item in images %}
+    <td><a href="{{item}}" target="_blank"><img src={{item}} height="100" ></a></td><td><a href="/set-profile/{{item}}">Set as PP</a></td><td><a href="/delete-image/{{item}}">Delete this</a></td>
+</tr>{% endfor %}
+</table>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="image">
+        <input type="submit" value="upload">
+    </form>
+    {% include "/flashed/flashed.html" %}
+</div>
+{% endblock %}

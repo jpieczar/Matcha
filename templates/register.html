@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+<form action="/register" method="post">
+    <table>
+    <tr><td>Username</td><td><input type="text" name="username"></td></tr>
+    <tr><td>Email</td><td><input type="email" name="email"></td></tr>
+    <tr><td>Password</td><td><input type="password" name="password"></td></tr>
+    <tr><td>Confirm password</td><td><input type="password" name="confirm"></td></tr>
+    <tr><td><button type="submit">Register</button></td></tr>
+</table>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class=flashes>
+    {% for message in messages %}
+    <li>{{message}}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+</form>
+<p>Already a member? <a href="/login">Sign in</a></p>
+</div>
+{% endblock %}

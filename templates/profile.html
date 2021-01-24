@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block logged_in %}
+<div>
+<table>
+    <tr><td><a href="/account">Edit Account</a></td>
+    <td><a href="/update-profile">Edit Profile</a></td>
+    <td><a href="/gallery">Gallery</a></td></tr>
+    {% for item in profile %}
+    <tr><td>{{item}}:</td><td>{{profile[item]}}</td></tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

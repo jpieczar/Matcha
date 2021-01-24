@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block logged_in %}
+<div>
+<table>
+<tr>
+    {% for item in images %}
+    <img src=/{{item}} height="200px">
+    {% endfor %}
+    </tr>
+    <tr>
+    <td><p>Name: {{ user.firstname }} {{ user.lastname }}</p>
+    <p>Age: {{user.age}}</p><p>Gender: {{user.gender}}</p><p>Sexual orientation: {{user.sexuality}}</p></td>
+    </tr>
+    <tr><td>Popularity: {{user.fame}}%</td></tr>
+    <tr><td><p>Bio:</p><p>{{user.bio}}</p></td></tr>
+    <tr><td>{{user.firstname}}'s interests:</td></tr>
+    {% for item in user.interests %}
+        <tr><td>{{item}}</td></tr>
+    {% endfor %}
+</div>
+</table>
+{% if matched %}
+<form method="POST" action="/message/{{user.id}}">
+    <input type="submit" value="Message"/>
+</form>
+{% else %}
+<form method="POST" action="/match/{{user.id}}">
+<input type="submit" value="Like!"/>
+</form>
+{% endif %}
+<div>
+<form method="POST" action="/report/{{user.id}}">
+    <input type="submit" value="Report user"/>
+    </form>
+    <form method="POST" action="/block/{{user.id}}">
+        <input type="submit" value="Block user"/>
+        </form>
+</div>
+</div>
+{% endblock %}

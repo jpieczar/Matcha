@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="/login" method="post">
+    <table>
+<tr><td>Email</td><td><input type="text" name="email" value="test@email.com"></td></tr>
+<tr><td>Password</td><td><input type="password" name="password" value="P@ssword1"></td></tr>
+<tr><td><button type="submit">Log in</button></td></tr>
+</table>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class=flashes>
+    {% for message in messages %}
+    <li>{{message}}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+<a href="/forgot-password">Forgotten your password?</a>
+</form>
+
+
+{% endblock %}

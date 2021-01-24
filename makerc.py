@@ -1,0 +1,5 @@
+myFile = open(".sqliterc", 'w')
+myFile.write("PRAGMA foreign_keys = ON;"+ '\n')
+myFile.write(".headers ON"+ '\n')
+myFile.write(".mode column"+ '\n')
+myFile.close()

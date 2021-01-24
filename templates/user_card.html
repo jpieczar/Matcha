@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block logged_in %}
+<div>
+<table>
+    {% set sort_on = request.args.sort_on|default('Name') %}
+    <tr>
+        <form action="/filter" method="POST">Filter:
+            <td>Minimum age:<input type="number" name="min_age"/></td>
+            <td>Maximum age:<input type="number" name="max_age"/></td>
+            <td>Minimum fame:<input type="number" name="min_fame"/></td>
+            <td>Maximum fame:<input type="number" name="max_fame"></td>
+            <td>Minimum common interests:<input type="number" name="min_interests"/></td>
+            <td>Maximum common interests:<input type="number" name="max_interests" /></td>
+            <td><input type="submit" value="Filter"/></td>
+        </form>
+    </tr>
+    <tr><td>Sort by:</td></tr>
+    <tr><td><form action="/" method="GET"><input type="submit" id="age" name="sort_on" value="Age"></input></form></td>
+        <td><form action="/" method="GET"><input type="submit" id="first_name" name="sort_on" value="Name"/></form></td>
+        <td><form action="/" method="GET"><input type="submit" name="sort_on" id="fame" value="Fame"/></form></td></tr>
+{% for user in potentials|sort(attribute=sort_on) %} 
+<tr>
+    <td style="border-bottom: 1px solid red;"><a href="/view-profile/{{user.id}}"><img src={{user.profilePic}} height="130px"></a></td>
+    <td><a href="/view-profile/{{user.id}}"><p>{{ user.Name }} {{ user.last_name }}</p>
+    <p>{{user.Age}}</p><p>Popularity: {{user.Fame}}%</p><p>{{user.sexuality}}</p></a></td>
+</a></tr>
+</div>
+{% endfor %}
+</table>
+</div>
+
+{% endblock %}

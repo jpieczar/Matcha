@@ -1,0 +1,2 @@
+from mail.sendMail import sendVerificationMail
+from mail.sendMail import sendPasswordMail

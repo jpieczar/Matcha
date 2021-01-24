@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block logged_in %}
+<div>
+<table>
+    {% if not notif%}
+    <tr>Sorry, there's nothing new</tr>
+    {% else %}
+    {% for item in notif %}
+    <tr><td>{{item}}</td></tr>
+    {% endfor %}
+    {% endif %}
+    </table>
+</div>
+
+{% endblock %}

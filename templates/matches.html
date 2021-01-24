@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block logged_in %}
+<div>
+<table>
+{% for user in matches %} 
+<tr>
+    <td style="border-bottom: 1px solid black;"><a href="/view-profile/{{user.id}}"><img src={{user.profilePic}} height="100px"></a></td>
+    <td><a href="/view-profile/{{user.id}}"><p>{{ user.first_name }} {{ user.last_name }}</p>
+    <p>{{user.age}}</p></a></td>
+</a></tr>
+<tr><td><a href="/message/{{user.id}}">Message</a></td></tr>
+</div>
+{% endfor %}
+</table>
+</div>
+{% endblock %}

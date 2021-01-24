@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block logged_in %}
+<div>
+    <div>
+    <form action="/update-profile" method="POST">
+        <table>
+            <tr><td>First name:</td><td><input type="text" name="first_name"></td></tr>
+            <tr><td>Last name:</td><td><input type="text" name="last_name"></td></tr>
+            <tr><td>Age:</td><td><input type="number" min=18 max=99 value={{age}} name="age"></td></tr>
+            <tr><td>Gender:</td><td><select name="gender">
+                <option value=1>Male</option>
+                <option value=0>Female</option>
+            </td></tr>
+            <tr><td>Sexuality:</td><td><select name="sexuality">
+                <option value="2">Bisexual</option>
+                <option value="1">Heterosexual</option>
+                <option value="0">Homosexual</option>
+            </td></tr>
+            <tr><td>Biography:</td><td><textarea name="bio" id="" cols="100" rows="5" maxlength="505"></textarea></td></tr>
+            <tr><td><button type="submit">Update</button></td></tr>
+        </table>
+        
+    </form>
+</div>
+<table>
+    <tr>
+        <form method="POST" action="/add-interest"><td>Add interest:</td><td><input type="text" name="interest"/><button type="submit" value="Submit">Submit</button></td><form>
+    </tr>
+</table>
+<div>
+    Interests:
+        {% for item in userInterests %}
+        <button formaction="/remove-interest/{{item}}" formmethod="POST" type="submit" value={{item}}>{{item}}</button>
+        {% endfor %}
+    </div>
+    <div>
+        
+        </div>
+        Select up to 5 interests:
+        <div>
+            {% for item in interests %}
+            <button formaction="/select-interest/{{item}}" formmethod="POST" type="submit" value={{item}}>{{item}}</button>
+            {% endfor %}
+        </div>
+        <div><button formaction="/" formmethod="GET">Save</button></div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block logged_in %}
+<div>
+    <p>Please complete your profile first</p>
+    <form action="/create-profile" method="POST">
+        <table>
+            <tr><td>First name:</td><td><input type="text" name="first_name" required></td></tr>
+            <tr><td>Last name:</td><td><input type="text" name="last_name" required></td></tr>
+            <tr><td>Age:</td><td><input type="number" min=18 max=99 value=18 name="age" required></td></tr>
+            <tr><td>Gender:</td><td><select name="gender">
+                <option value=1>Male</option>
+                <option value=0>Female</option>
+            </td></tr>
+            <tr><td>Sexuality:</td><td><select name="sexuality">
+                <option value="2">Bisexual</option>
+                <option value="1">Heterosexual</option>
+                <option value="0">Homosexual</option>
+            </td></tr>
+            <tr><td>Biography:</td><td><textarea name="bio" id="" cols="100" rows="5" maxlength="505" required></textarea></td></tr>
+            <tr><td><button type="submit">Update</button></td></tr>
+        </table>
+    </form>
+</div>
+{% endblock %}

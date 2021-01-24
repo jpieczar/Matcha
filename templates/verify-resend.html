@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+<table>
+<p>Your account has not been verified yet. Please click the link to resend a verification link</p>
+<td><form action="/resend-verification/{{email}}" method="GET"><input type="submit" value="Send link"/></form></td>
+</table>
+</div>
+{% endblock %}

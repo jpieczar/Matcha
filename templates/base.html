@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+{% set notifications = notifications %}
+<body>
+    <h1>Welcome to <a href="/" style="color: crimson">{{title}}</a></h1>
+    {% if session %}{{count}}<table>
+    <tr>
+    <td><a href="/">Dashboard</a></td>
+    <td><a href="/profile">Profile</a></td>
+    <td><a href="/matches">Matches</a></td>
+    <td><a href="/notifications">Notifications (<a href="/notifications" id="P1">0</a><a href="/notifications">)</a></a></td>
+    <td><a href="/logout">Logout</a></td>
+    <td><a href="#"><img src="{{PP}}"/></a></td>
+    {% block logged_in %}
+    {% endblock %}
+</tr>
+    </table>
+    {% else %}
+    {% block content %}{% endblock %}
+    {% endif %}
+</body>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf-8">
+    var socket = io();
+    socket.on('notifications', function(msg) {
+        document.getElementById("P1").innerHTML = msg
+    });
+    setInterval(function()  {
+        socket.emit("get-notifications", "")
+        }, 5000);
+</script>

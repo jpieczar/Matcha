@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block logged_in %}
+<div>
+    <form action="/account" method="POST">
+        <table>
+            <tr><td>Username:</td><td><input type="text" name="username"></td></tr>
+            <tr><td>Email address:</td><td><input type="text" name="email"></td></tr>
+            <tr><td><button type="submit">Update</button></td></tr>
+        </table>
+    </form>
+    <form action="/update-password" method="POST">
+        <table>
+            <tr><td>Current password:</td><td><input type="password" name="current_password" required></td></tr>
+            <tr><td>New password:</td><td><input type="password" name="new_password" required></td></tr>
+            <tr><td>Confirm password:</td><td><input type="password" name="confirm_password" required></td></tr>
+            <tr><td><button type="submit">Update</button></td></tr>
+        </table>
+    </form>
+    {% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class=flashes>
+    {% for message in messages %}
+    <li>{{message}}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+</div>
+{% endblock %}
